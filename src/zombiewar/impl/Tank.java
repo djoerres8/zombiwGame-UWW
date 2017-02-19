@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package zombiewar.impl;
-
+import zombiewar.intf.ISurvivor;
+import zombiewar.intf.IZombie;
 /**
  *
  * @author Jake
