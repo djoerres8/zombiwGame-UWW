@@ -1,6 +1,11 @@
 package zombiewar;
 
 import zombiewar.impl.CharacterFactory;
+import zombiewar.impl.Child;
+import zombiewar.impl.Common_Infected;
+import zombiewar.impl.Soldier;
+import zombiewar.impl.Tank;
+import zombiewar.impl.Teacher;
 import zombiewar.intf.ICharacter;
 import zombiewar.intf.ICharacterFactory;
 import zombiewar.intf.ISurvivor;
@@ -20,9 +25,8 @@ public class Main {
     for (int i = 0; i < zombies.length; i++) {
       int zombieType = (int) (Math.random() * 2);
       switch(zombieType){
-        case 0: zombies[i] = (IZombie) factory.make("common"); break;
+        case 0: zombies[i] = (IZombie) factory.make("commoninfected"); break;
         case 1: zombies[i] = (IZombie) factory.make("tank"); break;
-        case 2: zombies[i] = (IZombie) factory.make("predator"); break;
       }
     }
     return zombies;
@@ -34,10 +38,9 @@ public class Main {
     for (int i = 0; i < survivors.length; i++) {
       int type = (int) (Math.random() * 3);
       switch(type){
-        case 0: survivors[i] = (ISurvivor) factory.make("solider"); break;
+        case 0: survivors[i] = (ISurvivor) factory.make("soldier"); break;
         case 1: survivors[i] = (ISurvivor) factory.make("teacher"); break;
-        case 2: survivors[i] = (ISurvivor) factory.make("student"); break;
-        case 3: survivors[i] = (ISurvivor) factory.make("child"); break;
+        case 2: survivors[i] = (ISurvivor) factory.make("child"); break;
       }
     }
     return survivors;
@@ -62,6 +65,10 @@ public class Main {
     System.out.println("We have " + survivors.length + " survivors trying to make it to safety.");
     System.out.println("But there are " + zombies.length + " zombies waiting for them.");
     
+    for(int i=0; i<survivors.length; i++)
+    {
+    	System.out.println(i + ": " + survivors[i]);
+    }
     //TODO: the survivors attack first.  One characte attack each zombie.
     //      When all the survivors have done attacking, it's the zombies' 
     //      turn to attack.  For each zombie that is still alive, attack
@@ -77,7 +84,7 @@ public class Main {
     	if(survivors[i] instanceof Soldier) soldier++;
     }
 
-    System.out.println("There are " + child + " children, " + teacher + " teachers, and" + soldier + "soldiers");
+    System.out.println("There are " + child + " children, " + teacher + " teachers, and " + soldier + " soldiers");
     
     int common = 0;
     int tank = 0;
