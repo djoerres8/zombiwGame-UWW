@@ -62,9 +62,25 @@ public class Main {
 
     IZombie[] zombies = randomZombies();
     ISurvivor[] survivors = randomSurvivors();
-
-    System.out.println("We have " + survivors.length + " survivors trying to make it to safety.");
-    System.out.println("But there are " + zombies.length + " zombies waiting for them.");
+    
+    int teacher = 0;
+    int child = 0;
+    int soldier = 0;
+    for(int i = 0; i < survivors.length; i++){
+    	if(survivors[i] instanceof Teacher) teacher++;
+    	if(survivors[i] instanceof Child) child++;
+    	if(survivors[i] instanceof Soldier) soldier++;
+    }
+    System.out.println("We have " + survivors.length + " survivors trying to make it to safety (" + child + " children, " + teacher + " teachers, " + soldier + " soldiers)");
+    
+    int common = 0;
+    int tank = 0;
+    for(int i = 0; i < zombies.length; i++){
+    	if(zombies[i] instanceof Tank) tank++;
+    	if(zombies[i] instanceof CommonInfected) common++;
+    }
+    
+    System.out.println("But there are " + zombies.length + " zombies waiting for them (" + common + " common infected, " + tank + " tanks)");
     
    
     //TODO: the survivors attack first.  One characte attack each zombie.
@@ -72,6 +88,30 @@ public class Main {
     //      turn to attack.  For each zombie that is still alive, attack
     //      each suvivor that is still alive.  Repeat this cycle until
     //      all the zombies are all dead or all the survivors are all dead.
+       
+    while(!allDead(survivors) && !allDead(zombies)){
+    	for (int i = 0; i < survivors.length; i++){
+    		for (int j = 0; j < zombies.length; j++){
+    			if(survivors[i].isAlive() && zombies[j].isAlive()){
+    				survivors[i].attack(zombies[j]);
+    				if ( !zombies[j].isAlive()){
+    					System.out.println(survivors[i] + " killed " + zombies[j]);
+    				}
+    			}
+    		}
+    	}
+    	
+    	for(int i = 0; i < zombies.length; i++){
+    		for (int j = 0; j < survivors.length; j++){
+    			if(zombies[i].isAlive() && survivors[j].isAlive()){
+    				zombies[i].attack(survivors[j]);
+    				if(!survivors[j].isAlive()){
+    					System.out.println(zombies[i] + " killed " + survivors[j]);
+    				}
+    			}
+    		}
+    	}
+    }
     	 
     if (allDead(survivors)) {
       System.out.println("None of the survivors made it.");
