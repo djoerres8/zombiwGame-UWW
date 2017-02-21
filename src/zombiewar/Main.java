@@ -15,6 +15,7 @@ import zombiewar.intf.IZombie;
  *
  * @author thaoc
  */
+//making a test comment
 public class Main {
   
   private static final ICharacterFactory factory = CharacterFactory.instance;
