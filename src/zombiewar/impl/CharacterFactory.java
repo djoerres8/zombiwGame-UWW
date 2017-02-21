@@ -31,7 +31,7 @@ public class CharacterFactory implements ICharacterFactory{
       case "tank"     		: return new Tank();
       case "teacher"		: return new Teacher();
       case "child"		: return new Child();
-      case "common infect" 	: return new Common_Infect();
+      case "common infect" 	: return new CommonInfected();
     }
     return null;
   }
